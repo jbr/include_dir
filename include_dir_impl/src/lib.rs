@@ -11,7 +11,8 @@ use syn::{parse_macro_input, LitStr};
 
 use crate::dir::Dir;
 use std::env;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 mod dir;
 mod file;
@@ -61,4 +62,14 @@ fn load_dir(path: impl AsRef<Path>) -> Result<Dir, String> {
 
     Dir::from_disk(&path, &path)
         .map_err(|e| format!("Couldn't load the directory: {}", e.to_string()))
+}
+
+pub(crate) fn timestamp_to_tokenstream(
+    time: std::io::Result<SystemTime>,
+) -> proc_macro2::TokenStream {
+    time.ok()
+        .and_then(|m| m.duration_since(UNIX_EPOCH).ok())
+        .map(|dur| dur.as_secs_f64())
+        .map(|secs| quote! { Some(#secs) }.to_token_stream())
+        .unwrap_or_else(|| quote! { None }.to_token_stream())
 }
