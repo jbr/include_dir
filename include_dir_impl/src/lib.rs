@@ -11,7 +11,7 @@ use syn::{parse_macro_input, LitStr};
 
 use crate::dir::Dir;
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 mod dir;

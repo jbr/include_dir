@@ -1,36 +1,27 @@
 [package]
 authors = ["Michael Bryan <michaelfbryan@gmail.com>"]
-name = "include_dir"
-version = "0.6.3-alpha.0"
-description = "Embed the contents of a directory in your binary"
+name = "trillium-include-dir"
+version = "0.1.0"
+description = "temporary fork of the include_dir crate for use in trillium.rs"
 license = "MIT"
 readme = "../README.md"
 keywords = ["assets", "include", "embed", "dir"]
-repository = "https://github.com/Michael-F-Bryan/include_dir"
-categories = ["development-tools", "web-programming", "game-engines"]
-edition = "2018"
+repository = "https://github.com/jbr/include_dir"
+categories = ["development-tools", "web-programming"]
+edition = "2021"
 
 [package.metadata.docs.rs]
 all-features = true
 
-[badges.appveyor]
-branch = "master"
-repository = "Michael-F-Bryan/include-dir"
-service = "github"
-
-[badges.travis-ci]
-branch = "master"
-repository = "Michael-F-Bryan/include_dir"
-
 [dependencies]
 glob = { version = "0.3", optional = true }
 proc-macro-hack = "0.5"
-include_dir_impl = { version = "=0.6.3-alpha.0", path = "../include_dir_impl" }
+trillium-include-dir-impl = { version = "=0.1.0", path = "../include_dir_impl" }
 
 [dev-dependencies]
 tempdir = "0.3"
 
 [features]
-default = [ "search" ]
+default = ["search"]
 example-output = []
-search = [ "glob" ]
+search = ["glob"]

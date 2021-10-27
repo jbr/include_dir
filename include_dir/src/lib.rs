@@ -8,7 +8,7 @@
 //! the source code for the `include_dir` crate has been included inside itself.
 //!
 //! ```rust
-//! use include_dir::{include_dir, Dir};
+//! use trillium_include_dir::{include_dir, Dir};
 //! use std::path::Path;
 //!
 //! const PROJECT_DIR: Dir = include_dir!(".");
@@ -48,7 +48,7 @@
 
 #[allow(unused_imports)]
 #[macro_use]
-extern crate include_dir_impl;
+extern crate trillium_include_dir_impl;
 #[macro_use]
 extern crate proc_macro_hack;
 
@@ -65,11 +65,11 @@ pub use crate::globs::DirEntry;
 
 #[doc(hidden)]
 #[proc_macro_hack]
-pub use include_dir_impl::include_dir;
+pub use trillium_include_dir_impl::include_dir;
 
 #[doc(hidden)]
 #[proc_macro_hack]
-pub use include_dir_impl::try_include_dir;
+pub use trillium_include_dir_impl::try_include_dir;
 
 /// Example the output generated when running `include_dir!()` on itself.
 #[cfg(feature = "example-output")]

@@ -1,6 +1,6 @@
-use include_dir::{include_dir, Dir};
 use std::path::Path;
 use tempdir::TempDir;
+use trillium_include_dir::{include_dir, Dir};
 
 const PARENT_DIR: Dir<'_> = include_dir!(".");
 
