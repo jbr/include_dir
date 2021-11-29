@@ -14,12 +14,11 @@ edition = "2021"
 all-features = true
 
 [dependencies]
-glob = { version = "0.3", optional = true }
-proc-macro-hack = "0.5"
+glob = { version = "0.3.0", optional = true }
 trillium-include-dir-impl = { version = "=0.1.0", path = "../include_dir_impl" }
 
 [dev-dependencies]
-tempdir = "0.3"
+tempdir = "0.3.7"
 
 [features]
 default = ["search"]

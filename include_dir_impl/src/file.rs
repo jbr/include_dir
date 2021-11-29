@@ -1,5 +1,5 @@
 use crate::timestamp_to_tokenstream;
-use anyhow::Error;
+use crate::Error;
 use proc_macro2::TokenStream;
 use quote::{quote, ToTokens};
 use std::{
@@ -43,7 +43,7 @@ impl ToTokens for File {
         let created = timestamp_to_tokenstream(self.metadata.created());
         let accessed = timestamp_to_tokenstream(self.metadata.accessed());
         let tok = quote! {
-            $crate::File {
+            File {
                 path: #root_rel_path,
                 contents: include_bytes!(#abs_path),
                 modified: #modified,

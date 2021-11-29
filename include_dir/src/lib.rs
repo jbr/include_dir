@@ -48,9 +48,7 @@
 
 #[allow(unused_imports)]
 #[macro_use]
-extern crate trillium_include_dir_impl;
-#[macro_use]
-extern crate proc_macro_hack;
+pub extern crate trillium_include_dir_impl;
 
 mod dir;
 mod file;
@@ -63,13 +61,26 @@ pub use crate::file::File;
 #[cfg(feature = "search")]
 pub use crate::globs::DirEntry;
 
-#[doc(hidden)]
-#[proc_macro_hack]
-pub use trillium_include_dir_impl::include_dir;
+/// include a directory relative to the current crate root. this will
+/// panic if the directory cannot be found or accessed.
+#[macro_export]
+macro_rules! include_dir {
+    ($dir:literal) => {{
+        use $crate::{Dir, File};
+        $crate::trillium_include_dir_impl::include_dir!($dir)
+    }};
+}
 
-#[doc(hidden)]
-#[proc_macro_hack]
-pub use trillium_include_dir_impl::try_include_dir;
+/// macro to attempt to include a directory relative to the current
+/// crate root. if it cannot find the directory, it will return a
+/// static Err result with a &'static str. this will never panic.
+#[macro_export]
+macro_rules! try_include_dir {
+    ($dir:literal) => {{
+        use $crate::{Dir, File};
+        $crate::trillium_include_dir_impl::try_include_dir!($dir)
+    }};
+}
 
 /// Example the output generated when running `include_dir!()` on itself.
 #[cfg(feature = "example-output")]

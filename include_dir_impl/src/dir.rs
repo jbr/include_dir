@@ -1,5 +1,4 @@
-use crate::{file::File, timestamp_to_tokenstream};
-use anyhow::{self, format_err, Context, Error};
+use crate::{file::File, timestamp_to_tokenstream, Error};
 use proc_macro2::TokenStream;
 use quote::{quote, ToTokens};
 use std::{
@@ -34,13 +33,13 @@ impl Dir {
         let metadata = std::fs::metadata(&abs_path)?;
 
         if !abs_path.exists() {
-            return Err(format_err!("The directory doesn't exist"));
+            return Err("The directory doesn't exist".into());
         }
 
         let mut files = Vec::new();
         let mut dirs = Vec::new();
 
-        for entry in abs_path.read_dir().context("Couldn't read the directory")? {
+        for entry in abs_path.read_dir()? {
             let entry = entry?.path();
 
             if entry.is_file() {
@@ -70,7 +69,7 @@ impl ToTokens for Dir {
         let accessed = timestamp_to_tokenstream(self.metadata.accessed());
 
         let tok = quote! {
-            $crate::Dir {
+            Dir {
                 path: #root_rel_path,
                 files: &[#(
                     #files
