@@ -1,7 +1,7 @@
 [package]
 authors = ["Michael Bryan <michaelfbryan@gmail.com>"]
 name = "trillium-include-dir-impl"
-version = "0.1.0"
+version = "0.1.1"
 description = "temporary fork of the include_dir_impl crate for use in trillium.rs"
 license = "MIT"
 readme = "../README.md"
